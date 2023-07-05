@@ -73,6 +73,7 @@ def main():
     with st.expander("See realtime violence updates for more information"):
       for message in handler_consumer.consume_messages():
         if message is not None:
+          message = message.replace("'", '"')
           update_time()
           data = json.loads(message)
           annotated_text(
