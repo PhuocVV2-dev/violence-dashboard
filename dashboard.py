@@ -24,8 +24,6 @@ def update_time():
   dt_string = now.strftime("%d %B %Y %H:%M:%S")
   st.write(f"Last violence update: {dt_string}")
 
-
-@st.cache_resource()
 def init_kafka():
   handler_consumer = KafkaHandler(is_consumer=True)
   return handler_consumer
@@ -71,8 +69,8 @@ def main():
   
   if choice == 'Realtime':
     # Swap
-    for message in handler_consumer.consume_messages():
-      with st.expander("See realtime violence updates for more information"):
+    with st.expander("See realtime violence updates for more information"):
+      for message in handler_consumer.consume_messages():
         if message is not None:
           update_time()
           data = json.loads(message)
