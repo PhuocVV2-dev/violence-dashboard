@@ -26,6 +26,10 @@ class FirestoreData:
     def get_item_by_key_value(self, collection_name, field, value):
         doc = self.db.collection(collection_name).where(filter=FieldFilter(field, ">=", value)).get()
         return doc
+    def get_item_by_from_to(self, collection_name, field, _from, _to):
+        doc = self.db.collection(collection_name).where(filter=FieldFilter(field, ">=", _from)) \
+            .where(filter=FieldFilter(field, "<=", _to)).get()
+        return doc
 
     def add_document(self, data, collection_name):
         doc_ref = self.db.collection(collection_name).document()
