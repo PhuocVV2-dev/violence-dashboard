@@ -24,6 +24,7 @@ def update_time():
   dt_string = now.strftime("%d %B %Y %H:%M:%S")
   st.write(f"Last violence update: {dt_string}")
 
+@st.cache_resource()
 def init_kafka():
   handler_consumer = KafkaHandler(is_consumer=True)
   return handler_consumer
