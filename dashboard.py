@@ -39,7 +39,8 @@ def init_datastore():
 
 def query_datastore_by_timestamp(datastore: FirestoreData, timestamp) -> int:
   return len(datastore.get_item_by_key_value('violence-data', "timestamp", timestamp))
-
+def query_datastore_by_limit(datastore: FirestoreData, _from, _to) -> int:
+  return len(datastore.get_item_by_from_to('violence-data', "timestamp", _from, _to))
 
 def total_violations(datastore: FirestoreData, collection_name) -> int:
   return datastore.count_all(collection_name)
@@ -89,7 +90,7 @@ def main():
           )
   if choice == "Statistics":
     number_today = query_datastore_by_timestamp(fs, today)
-    number_yesterday = query_datastore_by_timestamp(fs, yesterday)
+    number_yesterday = query_datastore_by_limit(fs, yesterday, today)
     
     m1, m2, m3 = st.columns(3)
     # fill in those three columns with respective metrics or KPIs
