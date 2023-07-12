@@ -70,9 +70,9 @@ def main():
   st.sidebar.markdown(link, unsafe_allow_html=True)
   
   if choice == 'Realtime':
-    
-    with st.expander("See realtime violence updates for more information"):
-      for message in handler_consumer.consume_messages():
+    # Swap
+    for message in handler_consumer.consume_messages():
+      with st.expander("See realtime violence updates for more information"):
         if message is not None:
           update_time()
           data = json.loads(message)
