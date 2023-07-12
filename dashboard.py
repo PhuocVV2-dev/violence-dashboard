@@ -102,7 +102,7 @@ def main():
     m2.metric(
       label="Number of violence last day",
       value=number_yesterday,
-      delta=number_yesterday - number_today,
+      delta=-number_yesterday + number_today,
     )
     
     m3.metric(
